@@ -1,0 +1,89 @@
+TEST_STRING: 'une chaîne de caractères de test provenant des ressources'
+
+# Generic Strings
+GENERIC_SORRY: 'Désolé...'
+GENERIC_PAGE: 'Page'
+GENERIC_OF: 'sur'
+GENERIC_UNLOADED: 'NON CHARGÉ'
+GENERIC_PLUGIN_DISABLED: 'Ce plugin est désactivé !'
+GENERIC_ERROR: '[Erreur]'
+GENERIC_SUCCESS: '[Succès]'
+GENERIC_INFO: '[Info]'
+GENERIC_HELP: '[Aide]'
+GENERIC_COMMAND_NO_PERMISSION: 'Vous n''avez pas la permission de %1. (%2)'
+GENERIC_THE_CONSOLE: 'la console'
+GENERIC_NOT_LOGGED_IN: '%1 n''est pas connecté !'
+GENERIC_OFF: 'OFF'
+
+# Errors
+ERROR_CONFIG_LOAD: 'Une erreur a été rencontrée lors du chargement du fichier de configuration.  Disabling...'
+ERROR_DATA_LOAD: 'Une erreur a été rencontrée lors du chargement du fichier de données.  Disabling...'
+ERROR_NO_GROUP: '&6Il n''y a pas de groupe s''appelant : &f%1'
+ERROR_NO_WORLD: '&6Il n''y a pas de monde s''appelant : &f%1'
+ERROR_NO_WORLD_PROFILE: '&6Il n''y a pas de profil pour le monde : &f%1'
+ERROR_PLUGIN_NOT_ENABLED: '&f%1 &6n''est pas activé, vous ne pouvez pas importer de données depuis celui-ci !'
+ERROR_UNSUPPORTED_IMPORT: '&6Désolé, ''&f%1&6'' n''est pas un plugin supporté pour l''importation des données.'
+ERROR_NO_SHARES_SPECIFIED: '&cYou did not specify any valid shares!'
+
+CONFLICT_RESULTS: 'Conflits trouvés pour les groupes : ''%1'' et ''%2'' car ils ont en commun : ''%3'' pour le(s) monde(s): ''%4'''
+CONFLICT_CHECKING: 'Vérification des conflits entre groupes...'
+CONFLICT_FOUND: 'Conflits trouvés... Si ils ne sont pas résolus, vous pourriez avoir des problèmes avec vos données.'
+CONFLICT_NOT_FOUND: 'Aucun conflit de groupe trouvé !'
+
+
+## Commands
+# Info Command
+INFO_WORLD: 
+- '&b===[ Info pour le monde : &6%1&b ]==='
+INFO_WORLD_INFO:
+- '&6Groups:&f %1'
+INFO_GROUP: 
+- '&b===[ Info pour le groupe : &6%1&b ]==='
+INFO_GROUP_INFO:
+- '&6Mondes :&f %1'
+- '&bValeurs partagées :&f %2'
+- '&bValeurs non partagées :&f %3'
+
+# List Command
+LIST_GROUPS:
+- '&b===[ Liste des groupes ]==='
+- '&6Groupes:&f %1'
+
+# Reload Command
+RELOAD_COMPLETE:
+- '&b===[ Rechargement terminé ! ]==='
+
+# Addworld Command
+WORLD_ADDED:
+- '&6Le monde &f%1 &6a été ajouté au groupe &f%2'
+WORLD_ALREADY_EXISTS:
+- '&6Le monde &f%1 &6fait déjà partie du groupe : &f%2'
+
+# Removeworld Command
+WORLD_REMOVED:
+- '&6Le monde &f%1 &6a été retiré du groupe &f%2'
+WORLD_NOT_IN_GROUP:
+- '&6Le monde &f%1 &6ne fait pas partie du groupe &f%2'
+
+# Add/remove shares command
+NOW_SHARING:
+- '&6Le groupe &f%1 &6partage : &f%2 &6et ne partage pas : &f%3'
+
+# Spawn command
+TELEPORTING:
+- 'Téléportation au spawn de ce groupe de monde...'
+TELEPORTED_BY:
+- 'Vous avez été téléporté par : %1'
+TELEPORT_CONSOLE_ERROR:
+- 'Depuis la console, vous devez entrer un JOUEUR'
+
+# Debug command
+INVALID_DEBUG:
+- '&fNiveau de débogage invalide.  Veuillez entrer un nombre entre 0 et 3.  &b(3 étant beaucoup de messages !)'
+DEBUG_SET:
+- 'Niveau de débogage = %1'
+
+# Toggle command
+NOW_USING_OPTIONAL: '&f%1 &6 sera désormais considéré lorsqu''un joueur change de monde.'
+NOW_NOT_USING_OPTIONAL: '&f%1 &6ne sera désormais plus considéré lorsqu''un joueur change de monde.'
+NO_OPTIONAL_SHARES: '&f%1 &6n''est pas une valeur partagée optionnelle !'
