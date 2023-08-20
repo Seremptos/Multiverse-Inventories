@@ -18,7 +18,7 @@ public class MIPlayerFileLoader {
     public MIPlayerFileLoader(MultiInv plugin, OfflinePlayer player, String group) {
         // Find and load configuration file for the player
         File worldsFolder = new File(plugin.getDataFolder(), "Groups");
-        file = new File(worldsFolder, group + File.separator + player.getName() + ".yml");
+        file = new File(worldsFolder, group + File.separator + player.getUniqueId() + ".yml");
 
         playerFile = new YamlConfiguration();
     }
