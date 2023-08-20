@@ -1,6 +1,7 @@
 package com.onarandombox.multiverseinventories;
 
 import com.dumptruckman.bukkit.configuration.json.JsonConfiguration;
+import com.google.common.base.Charsets;
 import com.onarandombox.multiverseinventories.profile.container.ContainerType;
 import com.onarandombox.multiverseinventories.share.Sharables;
 import com.onarandombox.multiverseinventories.share.Shares;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -323,7 +325,7 @@ public class TestWorldChanged {
         assertNotSame(satTest, player.getSaturation());
 
         FlatFileDataHelper dataHelper = new FlatFileDataHelper(inventories.getData());
-        File playerFile = dataHelper.getPlayerFile(ContainerType.GROUP, "default", "dumptruckman");
+        File playerFile = dataHelper.getPlayerFile(ContainerType.GROUP, "default", UUID.nameUUIDFromBytes(("OfflinePlayer:" + "dumptruckman").getBytes(Charsets.UTF_8)));
         FileConfiguration playerConfig = JsonConfiguration.loadConfiguration(playerFile);
         playerConfig.set("SURVIVAL." + DataStrings.PLAYER_INVENTORY_CONTENTS, null);
         playerConfig.set("SURVIVAL." + DataStrings.PLAYER_ARMOR_CONTENTS, null);

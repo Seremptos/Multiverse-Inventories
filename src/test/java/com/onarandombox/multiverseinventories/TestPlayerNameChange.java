@@ -131,9 +131,7 @@ public class TestPlayerNameChange {
     }
 
     public GlobalProfile getAndCheckGlobalProfile(Player player) {
-        GlobalProfile globalProfile = this.inventories.getData().getGlobalProfile(player.getName(), player.getUniqueId());
-        assertEquals(globalProfile.getLastKnownName(), player.getName());
-        assertEquals(globalProfile.getPlayerName(), player.getName());
+        GlobalProfile globalProfile = this.inventories.getData().getGlobalProfile(player.getUniqueId());
         assertEquals(globalProfile.getPlayerUUID(), player.getUniqueId());
 
         return globalProfile;
