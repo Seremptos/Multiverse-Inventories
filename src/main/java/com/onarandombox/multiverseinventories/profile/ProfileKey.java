@@ -9,34 +9,26 @@ import java.util.UUID;
 public final class ProfileKey {
 
     public static ProfileKey createProfileKey(ContainerType containerType, String dataName,
-                                              ProfileType profileType, UUID playerUUID, String playerName) {
-        return new ProfileKey(containerType, dataName, profileType, playerUUID, playerName);
-    }
-
-    public static ProfileKey createProfileKey(ContainerType containerType, String dataName,
                                               ProfileType profileType, UUID playerUUID) {
         return new ProfileKey(containerType, dataName, profileType, playerUUID);
     }
 
     public static ProfileKey createProfileKey(ProfileKey copyKey, ContainerType containerType) {
-        return new ProfileKey(containerType, copyKey.getDataName(), copyKey.getProfileType(), copyKey.getPlayerUUID(),
-                copyKey.getPlayerName());
+        return new ProfileKey(containerType, copyKey.getDataName(), copyKey.getProfileType(), copyKey.getPlayerUUID());
     }
 
     public static ProfileKey createProfileKey(ProfileKey copyKey, ProfileType profileType) {
-        return new ProfileKey(copyKey.getContainerType(), copyKey.getDataName(), profileType, copyKey.getPlayerUUID(),
-                copyKey.getPlayerName());
+        return new ProfileKey(copyKey.getContainerType(), copyKey.getDataName(), profileType, copyKey.getPlayerUUID());
     }
 
     public static ProfileKey createProfileKey(ProfileKey copyKey, ContainerType containerType,
                                               ProfileType profileType) {
-        return new ProfileKey(containerType, copyKey.getDataName(), profileType, copyKey.getPlayerUUID(),
-                copyKey.getPlayerName());
+        return new ProfileKey(containerType, copyKey.getDataName(), profileType, copyKey.getPlayerUUID());
     }
 
     public static ProfileKey createProfileKey(PlayerProfile profile) {
         return new ProfileKey(profile.getContainerType(), profile.getContainerName(), profile.getProfileType(),
-                profile.getPlayer().getUniqueId(), profile.getPlayer().getName());
+                profile.getPlayer().getUniqueId());
     }
 
     private final ContainerType containerType;
@@ -51,15 +43,6 @@ public final class ProfileKey {
         this.profileType = profileType;
         this.playerUUID = playerUUID;
         this.playerName = Bukkit.getOfflinePlayer(playerUUID).getName();
-    }
-
-    private ProfileKey(ContainerType containerType, String dataName, ProfileType profileType,
-                       UUID playerUUID, String playerName) {
-        this.containerType = containerType;
-        this.dataName = dataName;
-        this.profileType = profileType;
-        this.playerUUID = playerUUID;
-        this.playerName = playerName;
     }
 
     public ContainerType getContainerType() {

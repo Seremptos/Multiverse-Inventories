@@ -119,24 +119,6 @@ public class InventoriesListener implements Listener {
 
         Logging.finer("Loading global profile for Player{name:'%s', uuid:'%s'}.",
                 event.getName(), event.getUniqueId());
-
-        GlobalProfile globalProfile = inventories.getData().getGlobalProfile(event.getName(), event.getUniqueId());
-        if (!globalProfile.getLastKnownName().equalsIgnoreCase(event.getName())) {
-            // Data must be migrated
-            Logging.info("Player %s changed name from '%s' to '%s'. Attempting to migrate playerdata...",
-                    event.getUniqueId(), globalProfile.getLastKnownName(), event.getName());
-            try {
-                inventories.getData().migratePlayerData(globalProfile.getLastKnownName(), event.getName(),
-                        event.getUniqueId(), true);
-            } catch (IOException e) {
-                Logging.severe("An error occurred while trying to migrate playerdata.");
-                e.printStackTrace();
-            }
-
-            globalProfile.setLastKnownName(event.getName());
-            inventories.getData().updateGlobalProfile(globalProfile);
-            Logging.info("Migration complete!");
-        }
     }
 
     /**
@@ -147,13 +129,13 @@ public class InventoriesListener implements Listener {
     @EventHandler
     public void playerJoin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-        final GlobalProfile globalProfile = inventories.getData().getGlobalProfile(player.getName(), player.getUniqueId());
+        final GlobalProfile globalProfile = inventories.getData().getGlobalProfile(player.getUniqueId());
         final String world = globalProfile.getLastWorld();
         if (inventories.getMVIConfig().usingLoggingSaveLoad() && globalProfile.shouldLoadOnLogin()) {
             ShareHandlingUpdater.updatePlayer(inventories, player, new DefaultPersistingProfile(Sharables.allOf(),
                     inventories.getWorldProfileContainerStore().getContainer(world).getPlayerData(player)));
         }
-        inventories.getData().setLoadOnLogin(player.getName(), false);
+        inventories.getData().setLoadOnLogin(player.getUniqueId(), false);
         verifyCorrectWorld(player, player.getWorld().getName(), globalProfile);
     }
 
@@ -166,23 +148,23 @@ public class InventoriesListener implements Listener {
     public void playerQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
         final String world = event.getPlayer().getWorld().getName();
-        inventories.getData().updateLastWorld(player.getName(), world);
+        inventories.getData().updateLastWorld(player.getUniqueId(), world);
         if (inventories.getMVIConfig().usingLoggingSaveLoad()) {
             ShareHandlingUpdater.updateProfile(inventories, player, new DefaultPersistingProfile(Sharables.allOf(),
                     inventories.getWorldProfileContainerStore().getContainer(world).getPlayerData(player)));
-            inventories.getData().setLoadOnLogin(player.getName(), true);
+            inventories.getData().setLoadOnLogin(player.getUniqueId(), true);
         }
     }
 
     private void verifyCorrectWorld(Player player, String world, GlobalProfile globalProfile) {
         if (globalProfile.getLastWorld() == null) {
-            inventories.getData().updateLastWorld(player.getName(), world);
+            inventories.getData().updateLastWorld(player.getUniqueId(), world);
         } else {
             if (!world.equals(globalProfile.getLastWorld())) {
                 Logging.fine("Player did not spawn in the world they were last reported to be in!");
                 new WorldChangeShareHandler(this.inventories, player,
                         globalProfile.getLastWorld(), world).handleSharing();
-                inventories.getData().updateLastWorld(player.getName(), world);
+                inventories.getData().updateLastWorld(player.getUniqueId(), world);
             }
         }
     }
@@ -225,7 +207,7 @@ public class InventoriesListener implements Listener {
         }
 
         new WorldChangeShareHandler(this.inventories, player, fromWorld.getName(), toWorld.getName()).handleSharing();
-        inventories.getData().updateLastWorld(player.getName(), toWorld.getName());
+        inventories.getData().updateLastWorld(player.getUniqueId(), toWorld.getName());
     }
 
     /**
@@ -303,7 +285,7 @@ public class InventoriesListener implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(inventories, new Runnable() {
             public void run() {
                 verifyCorrectWorld(player, player.getWorld().getName(),
-                        inventories.getData().getGlobalProfile(player.getName(), player.getUniqueId()));
+                        inventories.getData().getGlobalProfile(player.getUniqueId()));
             }
         }, 2L);
     }
