@@ -43,11 +43,8 @@ import uk.co.tggl.pluckerpluck.multiinv.MultiInv;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -157,6 +154,12 @@ public class MultiverseInventories extends JavaPlugin implements MVPlugin, Messa
             Logging.init(this);
             Perm.register(this);
 
+            try {
+                convertPlayernamesToUUID();
+            } catch (IOException e) {
+                Logging.getLogger().warning("Error while trying to convert playernames to UUIDs.");
+            }
+
             MultiverseCore mvCore;
             mvCore = (MultiverseCore) this.getServer().getPluginManager().getPlugin("Multiverse-Core");
             // Test if the Core was found, if not we'll disable this plugin.
@@ -212,12 +215,6 @@ public class MultiverseInventories extends JavaPlugin implements MVPlugin, Messa
             Sharables.init(this);
 
             this.dupingPatch = InventoriesDupingPatch.enableDupingPatch(this);
-
-            try {
-                convertPlayernamesToUUID();
-            } catch (IOException e) {
-                Logging.getLogger().warning("Error while trying to convert playernames to UUIDs.");
-            }
 
             // Display enable message/version info
             Logging.log(true, Level.INFO, "enabled.");
