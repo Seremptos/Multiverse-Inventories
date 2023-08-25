@@ -22,7 +22,7 @@ repositories {
 
     maven {
         name = 'seremptos-jsonconfiguration'
-        url = uri('https://maven.pkg.github.com/Seremptos/JsonConfiguration')
+        url = uri('https://public:&#103;hp_QO9T0Q1C7o7bZSjA1F7iAkA1GXTDzC38juWB@maven.pkg.github.com/Seremptos/JsonConfiguration')
     }
 
     maven {
