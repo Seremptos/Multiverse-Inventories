@@ -21,6 +21,11 @@ repositories {
     }
 
     maven {
+        name = 'seremptos-jsonconfiguration'
+        url = uri('https://maven.pkg.github.com/Seremptos/JsonConfiguration')
+    }
+
+    maven {
         name ='papermc'
         url = uri('https://papermc.io/repo/repository/maven-public/')
     }
